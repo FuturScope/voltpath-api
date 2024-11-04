@@ -73,3 +73,20 @@ export const registerUser = async (req, res, next) => {
       next(error);
     }
   }
+
+  export const deleteUser = async (req, res, next) => {
+    try {
+        // Delete user from the database
+        const deletedUser = await UserModel.findByIdAndDelete(req.auth.id);
+
+        // Check if user was found and deleted
+        if (!deletedUser) {
+            return res.status(404).json("User not found!");
+        }
+
+        // Respond with a success message
+        res.json("User deleted successfully!");
+    } catch (error) {
+        next(error);
+    }
+}
