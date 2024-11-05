@@ -3,15 +3,15 @@ import { toJSON } from "@reis/mongoose-to-json";
 
 const reservationSchema = new Schema(
     {
-        user: { type: Types.ObjectId, ref: "User", required: true },
-        chargingStation: { type: Types.ObjectId, ref: "ChargingStation", required: true },
-        reservationTime: { type: Date, required: true },
+        reservationTime: { type: String, required: true },
+        reservationDate: { type: Date, required: true },
         price: { type: Number, required: true },
-        isAvailable: { type: Boolean, default: true }
-    },
-    {
-        timestamps: true,
-    }
+        isAvailable: { type: Boolean, default: true },
+        user: { type: Types.ObjectId, required: true, ref: "User", },
+        chargingStation: { type: Types.ObjectId, required: false, ref: "ChargingStation" },
+    }, {
+    timestamps: true,
+}
 );
 
 reservationSchema.plugin(toJSON);

@@ -1,6 +1,7 @@
 import { ReservationModel } from "../models/reservation.js";
 import { createRegistrationValidator, updateRegistrationValidator } from "../validators/reservation.js";
 
+
 // Create a new reservation
 export const createReservation = async (req, res, next) => {
     try {
