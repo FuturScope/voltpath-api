@@ -6,10 +6,8 @@ const reservationSchema = new Schema(
         user: { type: Types.ObjectId, ref: "User", required: true },
         chargingStation: { type: Types.ObjectId, ref: "ChargingStation", required: true },
         reservationTime: { type: Date, required: true },
-        status: {
-            type: [String], enum: ["reserved", "completed", "cancelled"],
-            default: "reserved"
-        }
+        price: { type: Number, required: true },
+        isAvailable: { type: Boolean, default: true }
     },
     {
         timestamps: true,

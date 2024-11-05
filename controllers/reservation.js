@@ -1,6 +1,5 @@
 import { ReservationModel } from "../models/reservation.js";
 import { createRegistrationValidator, updateRegistrationValidator } from "../validators/reservation.js";
-import cron from "node-cron";
 
 // Create a new reservation
 export const createReservation = async (req, res, next) => {
@@ -18,15 +17,15 @@ export const createReservation = async (req, res, next) => {
             ...value,
             user: req.auth.id
         });
-        // Schedule a reminder notification 15 minutes before reservation time
-        const reminderTime = new Date(reservation.reservationTime.getTime() - 15 * 60000);
-        // Schedule notification task
-        cron.schedule(`* * * * *`, async () => {
-            const currentTime = new Date();
-            if (currentTime >= reminderTime && reservation.status === "reserved") {
-                io.emit("reservationReminder", { message: "Your reservation is approaching!", reservationId: reservation._id });
-            }
-        });
+        // // Schedule a reminder notification 15 minutes before reservation time
+        // const reminderTime = new Date(reservation.reservationTime.getTime() - 15 * 60000);
+        // // Schedule notification task
+        // cron.schedule(`* * * * *`, async () => {
+        //     const currentTime = new Date();
+        //     if (currentTime >= reminderTime && reservation.status === "reserved") {
+        //         io.emit("reservationReminder", { message: "Your reservation is approaching!", reservationId: reservation._id });
+        //     }
+        // });
         // Send the user a response
         res.status(201).json("You have added a reservation!");
     } catch (error) {
@@ -54,6 +53,19 @@ export const getAllReservations = async (req, res, next) => {
         next(error);
     }
 }
+
+// Get a single reservation by ID
+export const getReservationById = async (req, res, next) => {
+    try {
+      // Find reservation by ID and populate related data
+      const reservation = await ReservationModel.findById(req.params.id).populate('userId chargingStationId');
+      if (!reservation) return res.status(404).send({ error: 'Reservation not found' });
+  
+      res.status(200).send(reservation);
+    } catch (error) {
+      next(error);
+    }
+  }
 
 // Update an existing reservation
 export const updateReservation = async (req, res, next) => {

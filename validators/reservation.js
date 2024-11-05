@@ -2,10 +2,12 @@ import Joi from "joi";
 
 export const createRegistrationValidator = Joi.object({
     reservationTime: Joi.string().required(),
-    status: Joi.string().required().valid("reserved", "completed", "cancelled")
+    price: Joi.number().required(),
+    isAvailalble: Joi.boolean().default("true")
 });
 
 export const updateRegistrationValidator = Joi.object({
     reservationTime: Joi.string(),
-    status: Joi.string()
+    price: Joi.number(),
+    isAvailalble: Joi.boolean()
 });
