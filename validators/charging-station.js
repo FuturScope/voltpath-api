@@ -5,5 +5,6 @@ export const chargingStationValidator = Joi.object({
   location: Joi.string().required(),
   chargerType: Joi.string().required(),
   chargingSpeed: Joi.string().required(),
-  powerOutput: Joi.string().required()
+  powerOutput: Joi.string().required(),
+  price: Joi.number().required()
 });

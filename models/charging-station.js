@@ -6,7 +6,8 @@ const chargingStationSchema = new Schema({
   location: { type: String, required: true },
   chargerType: { type: String, required: true },
   chargingSpeed: { type: String, required: true },
-  powerOutput: { type: String, required: true }
+  powerOutput: { type: String, required: true },
+  price: { type: Number, required: true }
 });
 
 chargingStationSchema.plugin(toJSON);
