@@ -58,15 +58,15 @@ export const getAllReservations = async (req, res, next) => {
 // Get a single reservation by ID
 export const getReservationById = async (req, res, next) => {
     try {
-      // Find reservation by ID and populate related data
-      const reservation = await ReservationModel.findById(req.params.id).populate('userId chargingStationId');
-      if (!reservation) return res.status(404).send({ error: 'Reservation not found' });
-  
-      res.status(200).send(reservation);
+        // Find reservation by ID and populate related data
+        const reservation = await ReservationModel.findById(req.params.id).populate("user");
+        if (!reservation) return res.status(404).send({ error: "Reservation not found" });
+
+        res.status(200).send(reservation);
     } catch (error) {
-      next(error);
+        next(error);
     }
-  }
+}
 
 // Update an existing reservation
 export const updateReservation = async (req, res, next) => {

@@ -6,13 +6,13 @@ const reservationSchema = new Schema(
         name: { type: String, required: true },
         reservationTime: { type: String, required: true },
         reservationDate: { type: Date, required: true },
-        isAvailable: { type: Boolean, default: true },
+        chargerType: { type: String, required: true },
+        location: { type: String, required: true },
         user: { type: Types.ObjectId, required: true, ref: "User", },
         chargingStation: { type: Types.ObjectId, required: false, ref: "ChargingStation" },
     }, {
-    timestamps: true,
-}
-);
+    timestamps: true
+});
 
 reservationSchema.plugin(toJSON);
 
