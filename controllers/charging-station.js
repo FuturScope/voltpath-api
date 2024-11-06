@@ -4,9 +4,11 @@ import { chargingStationValidator } from "../validators/charging-station.js";
 // Add charging station
 export const addChargingStation = async (req, res, next) => {
     try {
+        console.log("body--->", req.body)
         // Validate vendor inputs
         const { error, value } = chargingStationValidator.validate({
             ...req.body,
+            image: req.file?.filename
         });
         if (error) {
             return res.status(422).json(error);
