@@ -3,6 +3,7 @@ import { toJSON } from "@reis/mongoose-to-json";
 
 const chargingStationSchema = new Schema({
   name: { type: String, required: true },
+  image: { type: String, required: true },
   location: { type: String, required: true },
   chargerType: { type: String, required: true },
   chargingSpeed: { type: String, required: true },
