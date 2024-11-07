@@ -59,7 +59,7 @@ export const getAllReservations = async (req, res, next) => {
 export const getReservationById = async (req, res, next) => {
     try {
         // Find reservation by ID and populate related data
-        const reservation = await ReservationModel.findById(req.params.id).populate("user");
+        const reservation = await ReservationModel.findById(req.params.id);
         if (!reservation) return res.status(404).send({ error: "Reservation not found" });
 
         res.status(200).send(reservation);
