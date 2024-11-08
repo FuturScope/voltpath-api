@@ -9,7 +9,7 @@ const chargingStationRouter = Router();
 // Define routes
 chargingStationRouter.post("/chargingstations", isAuthenticated, chargingStationMediaUpload.single("image"), addChargingStation);
 
-chargingStationRouter.get("/chargingstations", isAuthenticated, getAllChargingStations);
+chargingStationRouter.get("/chargingstations", getAllChargingStations);
 
 chargingStationRouter.get("/chargingstations/:id", isAuthenticated, getChargingStationById);
 
