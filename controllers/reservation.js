@@ -1,7 +1,6 @@
 import { ReservationModel } from "../models/reservation.js";
 import { createRegistrationValidator, updateRegistrationValidator } from "../validators/reservation.js";
 
-
 // Create a new reservation
 export const createReservation = async (req, res, next) => {
     try {
@@ -18,15 +17,8 @@ export const createReservation = async (req, res, next) => {
             ...value,
             user: req.auth.id
         });
-        // // Schedule a reminder notification 15 minutes before reservation time
-        // const reminderTime = new Date(reservation.reservationTime.getTime() - 15 * 60000);
-        // // Schedule notification task
-        // cron.schedule(`* * * * *`, async () => {
-        //     const currentTime = new Date();
-        //     if (currentTime >= reminderTime && reservation.status === "reserved") {
-        //         io.emit("reservationReminder", { message: "Your reservation is approaching!", reservationId: reservation._id });
-        //     }
-        // });
+         // Send email notification
+         await sendEmail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
         // Send the user a response
         res.status(201).json("You have added a reservation!");
     } catch (error) {
