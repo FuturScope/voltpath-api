@@ -17,8 +17,8 @@ export const createReservation = async (req, res, next) => {
             ...value,
             user: req.auth.id
         });
-         // Send email notification
-         await sendEmail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
+        // Send email notification
+        await sendEmail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
         // Send the user a response
         res.status(201).json("You have added a reservation!");
     } catch (error) {
@@ -53,7 +53,6 @@ export const getReservationById = async (req, res, next) => {
         // Find reservation by ID and populate related data
         const reservation = await ReservationModel.findById(req.params.id);
         if (!reservation) return res.status(404).send({ error: "Reservation not found" });
-
         res.status(200).send(reservation);
     } catch (error) {
         next(error);

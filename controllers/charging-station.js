@@ -46,7 +46,6 @@ export const getChargingStationById = async (req, res) => {
     try {
         const { id } = req.params;
         const station = await ChargingStationModel.findById(id);
-
         if (!station) {
             return res.status(404).json({
                 success: false,
