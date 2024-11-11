@@ -1,5 +1,6 @@
 import { ReservationModel } from "../models/reservation.js";
 import { createRegistrationValidator, updateRegistrationValidator } from "../validators/reservation.js";
+import { mailTransporter } from "../utils/mail.js";
 
 // Create a new reservation
 export const createReservation = async (req, res, next) => {
@@ -18,7 +19,7 @@ export const createReservation = async (req, res, next) => {
             user: req.auth.id
         });
         // Send email notification
-        await sendEmail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
+        mailTransporter.sendMail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
         // Send the user a response
         res.status(201).json("You have added a reservation!");
     } catch (error) {
