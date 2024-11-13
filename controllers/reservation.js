@@ -19,7 +19,7 @@ export const createReservation = async (req, res, next) => {
             user: req.auth.id
         });
         // Send email notification
-        mailTransporter.sendMail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
+        // mailTransporter.sendMail(req.auth.email, "Reservation Confirmation", "Your reservation has been successfully created.");
         // Send the user a response
         res.status(201).json("You have added a reservation!");
     } catch (error) {
