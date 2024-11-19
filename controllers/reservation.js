@@ -26,7 +26,19 @@ export const createReservation = async (req, res, next) => {
             from: "Voltpath@gnail.com",
             to: email,
             subject: "You have a new reservation",
-            html: `<h1>You have a new reservation at ${req.body.reservationTime} on ${req.body.reservationDate}</h1>`,
+            html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <h1 style="color: #4CAF50;">Reservation Confirmation</h1>
+            <p>Dear Customer,</p>
+            <p>You have a new reservation scheduled at:</p>
+            <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px;">
+                <p><strong>Time:</strong> ${req.body.reservationTime}</p>
+                <p><strong>Date:</strong> ${req.body.reservationDate}</p>
+            </div>
+            <p>Thank you for choosing our service!</p>
+            <p style="font-size: 0.9em;">Best regards,<br/>Voltpath Team</p>
+        </div>
+    `,
         });
         // Send the user a response
         res.status(201).json("You have added a reservation!");
