@@ -25,7 +25,7 @@ export const registerUser = async (req, res, next) => {
       });
       // Send comfirmation email
       await mailTransporter.sendMail({
-        from: "admin@example.com",
+        from: process.env.EMAIL,
         to: value.email,
         subject: "Welcome to Voltpath! 🎉",
         html: `
